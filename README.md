@@ -9,6 +9,7 @@ automatically message all my linkedin connections
 5. you need to make at least one modification to the message before you send it or it will just send the linked in default
 
 # my code
+`
 for (const li of document.querySelector(`.scaffold-finite-scroll__content ul`).querySelectorAll('li')) {
     li.querySelector(`.entry-point`).children[1].dispatchEvent(new Event(`click`));
     await new Promise(r => setTimeout(r, 500));
@@ -36,3 +37,4 @@ for (const li of document.querySelector(`.scaffold-finite-scroll__content ul`).q
     });
     await new Promise(r => setTimeout(r, 500));
 }
+`
