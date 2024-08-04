@@ -10,22 +10,24 @@ automatically message all my linkedin connections
 
 # my code
 ```
-    for (const li of document.querySelector(`.scaffold-finite-scroll__content ul`).querySelectorAll('li')) {
-        li.querySelector(`.entry-point`).children[1].dispatchEvent(new Event(`click`));
+    defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
+    messageButtonContainerSelector = `.scaffold-finite-scroll__content ul`;
+    messageButtonSelector = `.entry-point`;
+    textBoxSelector = `.msg-form__contenteditable`;
+    for (const li of document.querySelector(messageButtonContainerSelector).querySelectorAll('li')) {
+        li.querySelector(messageButtonSelector).children[1].dispatchEvent(new Event(`click`));
         await new Promise(r => setTimeout(r, 500));
-        selector = `.msg-form__contenteditable`;
-        textBox = document.querySelector(selector);
-        defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
+        textBox = document.querySelector(textBoxSelector);
         textBox.innerHTML += "<p><br></p><p>" + defaultMessage + "</p>";
         textBox.dispatchEvent(new Event(`input`));
         await new Promise((resolve) => {
-            const targetElement = document.querySelector(selector);
+            const targetElement = document.querySelector(textBoxSelector);
             if (!targetElement) {
                 resolve();
                 return;
             }
             const observer = new MutationObserver((mutations, obs) => {
-                if (!document.querySelector(selector)) {
+                if (!document.querySelector(textBoxSelector)) {
                     obs.disconnect();
                     resolve();
                 }
@@ -37,4 +39,8 @@ automatically message all my linkedin connections
         });
         await new Promise(r => setTimeout(r, 500));
     }
+```
+# minified code
+```
+    for(const li of(defaultMessage="I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!",messageButtonContainerSelector=".scaffold-finite-scroll__content ul",messageButtonSelector=".entry-point",textBoxSelector=".msg-form__contenteditable",document.querySelector(messageButtonContainerSelector).querySelectorAll("li")))li.querySelector(messageButtonSelector).children[1].dispatchEvent(new Event("click")),await new Promise(e=>setTimeout(e,500)),textBox=document.querySelector(textBoxSelector),textBox.innerHTML+="<p><br></p><p>"+defaultMessage+"</p>",textBox.dispatchEvent(new Event("input")),await new Promise(e=>{let n=document.querySelector(textBoxSelector);if(!n){e();return}let o=new MutationObserver((n,o)=>{document.querySelector(textBoxSelector)||(o.disconnect(),e())});o.observe(document.body,{childList:!0,subtree:!0})}),await new Promise(e=>setTimeout(e,500));
 ```
