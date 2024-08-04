@@ -10,31 +10,31 @@ automatically message all my linkedin connections
 
 # my code
 `
-for (const li of document.querySelector(`.scaffold-finite-scroll__content ul`).querySelectorAll('li')) {
-    li.querySelector(`.entry-point`).children[1].dispatchEvent(new Event(`click`));
-    await new Promise(r => setTimeout(r, 500));
-    selector = `.msg-form__contenteditable`;
-    textBox = document.querySelector(selector);
-    defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
-    textBox.innerHTML += "<p><br></p><p>" + defaultMessage + "</p>";
-    textBox.dispatchEvent(new Event(`input`));
-    await new Promise((resolve) => {
-        const targetElement = document.querySelector(selector);
-        if (!targetElement) {
-            resolve();
-            return;
-        }
-        const observer = new MutationObserver((mutations, obs) => {
-            if (!document.querySelector(selector)) {
-                obs.disconnect();
+    for (const li of document.querySelector(`.scaffold-finite-scroll__content ul`).querySelectorAll('li')) {
+        li.querySelector(`.entry-point`).children[1].dispatchEvent(new Event(`click`));
+        await new Promise(r => setTimeout(r, 500));
+        selector = `.msg-form__contenteditable`;
+        textBox = document.querySelector(selector);
+        defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
+        textBox.innerHTML += "<p><br></p><p>" + defaultMessage + "</p>";
+        textBox.dispatchEvent(new Event(`input`));
+        await new Promise((resolve) => {
+            const targetElement = document.querySelector(selector);
+            if (!targetElement) {
                 resolve();
+                return;
             }
+            const observer = new MutationObserver((mutations, obs) => {
+                if (!document.querySelector(selector)) {
+                    obs.disconnect();
+                    resolve();
+                }
+            });
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true,
+            });
         });
-        observer.observe(document.body, {
-            childList: true,
-            subtree: true,
-        });
-    });
-    await new Promise(r => setTimeout(r, 500));
-}
+        await new Promise(r => setTimeout(r, 500));
+    }
 `
