@@ -11,13 +11,14 @@ automatically message all my linkedin connections
 # my code
 ```
 defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
+skipFirstNth = 0;
 startFromName = "";
-started = false;
 
+started = false;
 messageButtonContainerSelector = `.scaffold-finite-scroll__content ul`;
 messageButtonSelector = `.entry-point`;
 textBoxSelector = `.msg-form__contenteditable`;
-skipFirstNth = 0;
+
 
 for (const li of document.querySelector(messageButtonContainerSelector).querySelectorAll('li')) {
     skipFirstNth --;
