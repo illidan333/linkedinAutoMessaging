@@ -10,11 +10,15 @@ automatically message all my linkedin connections
 
 # my code
 ```
-defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
+defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. Thank you very much!";
 messageButtonContainerSelector = `.scaffold-finite-scroll__content ul`;
 messageButtonSelector = `.entry-point`;
 textBoxSelector = `.msg-form__contenteditable`;
+skipFirstNth = 41
 for (const li of document.querySelector(messageButtonContainerSelector).querySelectorAll('li')) {
+    skipFirstNth --;
+    if (skipFirstNth > 0)
+        continue;
     li.querySelector(messageButtonSelector).children[1].dispatchEvent(new Event(`click`));
     await new Promise(r => setTimeout(r, 800));
     textBox = document.querySelector(textBoxSelector);
