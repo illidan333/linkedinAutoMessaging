@@ -11,7 +11,7 @@ automatically message all my linkedin connections
 # my code
 ```
 defaultMessage = "I am currently looking for a job. If you know anyone is hiring, please let me know. I hope I can find a software engineer position near Vancouver, BC, Canada. However, I am also open to other positions and locations. Thank you very much!";
-startFromName = "Candace DeBacker";
+startFromName = "";
 started = false;
 
 messageButtonContainerSelector = `.scaffold-finite-scroll__content ul`;
