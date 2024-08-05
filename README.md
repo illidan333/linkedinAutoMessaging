@@ -23,7 +23,7 @@ for (const li of document.querySelector(messageButtonContainerSelector).querySel
     skipFirstNth --;
     if (skipFirstNth > 0)
         continue;
-    if (!started && li.querySelector("span.mn-connection-card__name").innerText != startFromName)
+    if (startFromName && !started && li.querySelector("span.mn-connection-card__name").innerText != startFromName)
         continue;
     else
         started = true;
