@@ -1,3 +1,4 @@
+```mermaid
 graph TD
     U[User] -->|Inputs resume & preferences| UI[Web UI]
     UI -->|Sends commands| API[API Gateway]
@@ -24,3 +25,4 @@ graph TD
     
     ApplicationSubmitter -->|Submits applications| JobSites
     ApplicationSubmitter -->|Updates tracking| ApplicationTracker
+```
