@@ -1,0 +1,69 @@
+---
+- name: Deploy JobHuntingMode Application
+  hosts: all
+  become: yes
+  vars:
+    app_dir: /opt/jobhuntingmode
+    backend_image: "{{ lookup('env', 'DOCKER_IMAGE_BACKEND') }}:{{ lookup('env', 'CI_COMMIT_SHA') }}"
+  
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Create application directory
+      file:
+        path: "{{ app_dir }}"
+        state: directory
+        mode: '0755'
+
+    - name: Copy frontend files
+      copy:
+        src: ../../frontend/build/web/
+        dest: "{{ app_dir }}/frontend"
+
+    - name: Pull backend Docker image
+      docker_image:
+        name: "{{ backend_image }}"
+        source: pull
+
+    - name: Start backend container
+      docker_container:
+        name: jobhuntingmode-backend
+        image: "{{ backend_image }}"
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
+        env:
+          DB_HOST: "{{ lookup('env', 'DB_HOST') }}"
+          DB_USER: "{{ lookup('env', 'DB_USER') }}"
+          DB_PASSWORD: "{{ lookup('env', 'DB_PASSWORD') }}"
+
+    - name: Install Nginx
+      apt:
+        name: nginx
+        state: present
+
+    - name: Configure Nginx
+      template:
+        src: nginx.conf.j2
+        dest: /etc/nginx/sites-available/jobhuntingmode
+      notify:
+        - Reload Nginx
+
+    - name: Enable Nginx site
+      file:
+        src: /etc/nginx/sites-available/jobhuntingmode
+        dest: /etc/nginx/sites-enabled/jobhuntingmode
+        state: link
+      notify:
+        - Reload Nginx
+
+  handlers:
+    - name: Reload Nginx
+      service:
+        name: nginx
+        state: reloaded

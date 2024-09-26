@@ -1,0 +1,33 @@
+
+jobhuntingmode/
+├── backend/
+│   ├── cmd/
+│   │   └── server/
+│   │       └── main.go
+│   ├── internal/
+│   │   ├── auth/
+│   │   ├── job/
+│   │   ├── resume/
+│   │   └── user/
+│   ├── pkg/
+│   │   ├── database/
+│   │   └── crawler/
+│   └── Dockerfile
+├── frontend/
+│   ├── lib/
+│   │   ├── main.dart
+│   │   ├── screens/
+│   │   ├── widgets/
+│   │   └── services/
+│   └── pubspec.yaml
+├── infrastructure/
+│   ├── terraform/
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── ansible/
+│       ├── playbooks/
+│       └── roles/
+├── .gitignore
+├── .gitlab-ci.yml
+└── README.md
